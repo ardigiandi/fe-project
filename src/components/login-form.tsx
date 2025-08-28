@@ -27,7 +27,6 @@ const formSchema = z.object({
 
 export function LoginForm({
   className,
-  ...props
 }: React.ComponentProps<"form">) {
   const [loading, setLoading] = useState<boolean>(false);
   const navigate = useNavigate()
