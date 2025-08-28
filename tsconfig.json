@@ -6,6 +6,7 @@
   ],
   "compilerOptions": {
     "verbatimModuleSyntax": false,
+    "skipLibCheck": true,
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
