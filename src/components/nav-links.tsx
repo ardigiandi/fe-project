@@ -13,12 +13,12 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
 
-export function NavProjects({
+export function NavLinks({
   title,
-  projects,
+  links,
 }: {
   title: string,
-  projects: {
+  links: {
     name: string
     url: string
     icon: LucideIcon
@@ -30,7 +30,7 @@ export function NavProjects({
     <SidebarGroup>
       <SidebarGroupLabel>{title}</SidebarGroupLabel>
       <SidebarMenu>
-        {projects.map((item) => (
+        {links.map((item) => (
           <SidebarMenuItem key={item.name}>
             <SidebarMenuButton asChild>
               <a href={item.url}>

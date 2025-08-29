@@ -6,16 +6,30 @@ import { Toaster } from "./components/ui/sonner.tsx";
 import SignupPage from "./pages/SignupPage.tsx";
 import AuthLayouts from "./pages/layouts/AuthLayouts.tsx";
 import DashboardPage from "./pages/DashboardPage.tsx";
+import PublicRoutes from "./routes/PublicRoutes.tsx";
 
 const root = document.getElementById("root") as HTMLElement;
+
+const publicRoutes = [
+  {
+    path: '/',
+    element: <LoginPage />
+  },
+  {
+    path: '/signup',
+    element: <SignupPage />
+  },
+]
 
 ReactDOM.createRoot(root).render(
   <BrowserRouter>
     <Toaster duration={2000} position="top-right" />
     <Routes>
-      <Route path="/" element={<LoginPage />} />
+      {publicRoutes.map(({path, element}) => (
+        <Route path={path} element={<PublicRoutes>{element}</PublicRoutes>} key={path} />
+      ))}
       <Route path="/signup" element={<SignupPage />} />
-      <Route path="/test" element={<><h1>Hallo ini test</h1></>} />
+      {/* <Route path="/test" element={<><h1>Hallo ini test</h1></>} /> */}
       <Route element={<AuthLayouts />}>
           <Route path="/dashboard" element={<DashboardPage />} />
       </Route>
