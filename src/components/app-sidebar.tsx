@@ -4,12 +4,10 @@ import * as React from "react";
 import {
   AudioWaveform,
   Command,
-  Frame,
   GalleryVerticalEnd,
   LayoutDashboard,
   ListCollapse,
   Mail,
-  Map,
   PieChart,
 
 } from "lucide-react";
