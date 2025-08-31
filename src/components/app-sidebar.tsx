@@ -51,7 +51,7 @@ const data = {
   dashboard: [
    {
       name: "Dashboard",
-      url: "#",
+      url: "/dashboard",
       icon: LayoutDashboard,
     },
   ],
@@ -59,7 +59,7 @@ const data = {
   projects: [
     {
       name: "Project",
-      url: "#",
+      url: "/project",
       icon: ListCollapse,
     },
     {
