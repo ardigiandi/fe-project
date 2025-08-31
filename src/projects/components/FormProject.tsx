@@ -28,7 +28,7 @@ import delay from "@/lib/delay";
 import { zodResolver } from "@hookform/resolvers/zod/src/zod.js";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router";
+// import { useNavigate } from "react-router";
 import { toast } from "sonner";
 import z from "zod";
 import ReactSelect from "react-select";
@@ -64,7 +64,7 @@ const FormProject = () => {
   const [open, setOpen] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [tags, setTags] = useState<TagsOption[]>([]);
-  const navigate = useNavigate();
+//   const navigate = useNavigate();
 
   //   ini untuk menu select
   const priorityOptions = [
