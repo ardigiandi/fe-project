@@ -69,7 +69,7 @@ const data = {
     },
     {
       name: "Invitations",
-      url: "#",
+      url: "/my-invitations",
       icon: Mail,
     },
   ],

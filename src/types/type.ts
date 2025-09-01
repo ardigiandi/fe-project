@@ -1,3 +1,9 @@
+export interface Collaborators {
+  _id: string;
+  name: string;
+  email: string;
+}
+
 export interface Project {
   _id: string;
   title: string;
@@ -6,11 +12,7 @@ export interface Project {
   priority: string;
   completed: string;
   tags: string[];
-  collaborators: {
-    _id: string;
-    name: string;
-    email: string;
-  }[];
+  collaborators: Collaborators[];
   owner: {
     _id: string;
     name: string;
@@ -19,4 +21,25 @@ export interface Project {
   totalJobsCount: number;
   completedJobsCount: number;
   percencetageCompleted: number;
+}
+
+export interface Invitation {
+  _id: string;
+  status: string;
+  receiver: {
+    _id: string;
+    name: string;
+    email: string;
+  };
+  sender: {
+    _id: string;
+    name: string;
+    email: string;
+  };
+  project: {
+    title: string;
+    description: string;
+    dueDate: string;
+  };
+  createdAt: string;
 }

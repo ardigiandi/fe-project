@@ -5,10 +5,18 @@ import { Project } from "@/types/type";
 import delay from "@/lib/delay";
 import apiClient from "@/config/axios";
 import { toast } from "sonner";
-import { Box, CalendarDays, CheckCircle, ClipboardList, Flag } from "lucide-react";
+import {
+  ArrowRight,
+  Box,
+  CalendarDays,
+  CheckCircle,
+  ClipboardList,
+  Flag,
+} from "lucide-react";
 import { format } from "date-fns";
 import { id } from "date-fns/locale";
 import DeleteProject from "./components/DeleteProject";
+import { Link } from "react-router";
 
 const ProjectsPage = () => {
   const [projects, setProjects] = useState<Project[]>([]);
@@ -28,13 +36,13 @@ const ProjectsPage = () => {
   const borderTheme = (priority: string) => {
     switch (priority) {
       case "high":
-        return "border-l-red-500"
+        return "border-l-red-500";
       case "medium":
-        return "border-l-teal-500"
+        return "border-l-teal-500";
       case "low":
-        return "border-l-sky-500"
+        return "border-l-sky-500";
     }
-  }
+  };
 
   useEffect(() => {
     getProjects();
@@ -50,7 +58,9 @@ const ProjectsPage = () => {
         {projects.map((project, index) => (
           <div
             key={index}
-            className={`relative p-5 ${borderTheme(project.priority)} bg-white border-4 border-t-0 border-r-0 border-b-0 rounded-tl-none rounded-bl-none rounded-lg shadow-sm hover:shadow-lg transition-all group mb-2`}
+            className={`relative p-5 ${borderTheme(
+              project.priority
+            )} bg-white border-4 border-t-0 border-r-0 border-b-0 rounded-tl-none rounded-bl-none rounded-lg shadow-sm hover:shadow-lg transition-all group mb-2`}
           >
             <div className="absolute top-16 right-10">
               <Box size={100} className="text-muted-foreground opacity-10" />
@@ -113,9 +123,20 @@ const ProjectsPage = () => {
               <div className="flex items-center justify-between">
                 <div>
                   <FormProject getProject={getProjects} project={project} />
-                  <DeleteProject projectId={project._id} getProject={getProjects} />
+                  <DeleteProject
+                    projectId={project._id}
+                    getProject={getProjects}
+                  />
                 </div>
-                <div className="text-right">Manage Job</div>
+                <div className="text-right">
+                  <Link
+                    to={`/manage-jobs/${project._id}`}
+                    className="hover:underline transition-all text-blue-800 flex gap-x-1 items-center"
+                  >
+                      Manage Jobs
+                    <ArrowRight size={16} />
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
