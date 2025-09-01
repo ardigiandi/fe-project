@@ -25,6 +25,17 @@ const ProjectsPage = () => {
     }
   };
 
+  const borderTheme = (priority: string) => {
+    switch (priority) {
+      case "high":
+        return "border-l-red-500"
+      case "medium":
+        return "border-l-teal-500"
+      case "low":
+        return "border-l-sky-500"
+    }
+  }
+
   useEffect(() => {
     getProjects();
   }, []);
@@ -39,7 +50,7 @@ const ProjectsPage = () => {
         {projects.map((project, index) => (
           <div
             key={index}
-            className={`relative p-5 bg-white border-4 border-t-0 border-r-0 border-b-0 rounded-tl-none rounded-bl-none rounded-lg shadow-sm hover:shadow-lg transition-all group mb-2`}
+            className={`relative p-5 ${borderTheme(project.priority)} bg-white border-4 border-t-0 border-r-0 border-b-0 rounded-tl-none rounded-bl-none rounded-lg shadow-sm hover:shadow-lg transition-all group mb-2`}
           >
             <div className="absolute top-16 right-10">
               <Box size={100} className="text-muted-foreground opacity-10" />

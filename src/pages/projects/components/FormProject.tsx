@@ -129,7 +129,7 @@ const FormProject = ({ getProject, project }: FormProjectProps) => {
       toast.success(data.message, {
         onAutoClose: () => {
           setOpen(false);
-          getProject()
+          getProject();
         },
       });
       setLoading(false);
@@ -150,7 +150,7 @@ const FormProject = ({ getProject, project }: FormProjectProps) => {
           variant={"ghost"}
           className={project ? "text-blue-800 hover:bg-white" : ""}
         >
-          {project ? 'Edit' : 'Create Project'}
+          {project ? "Edit" : "Create Project"}
         </Button>
       </DialogTrigger>
       <DialogContent>
@@ -233,6 +233,9 @@ const FormProject = ({ getProject, project }: FormProjectProps) => {
                             isMulti
                             isClearable
                             placeholder="Select tags"
+                            value={tags.filter((tag) =>
+                              field.value.includes(tag.value)
+                            )}
                             onChange={(value) => {
                               field.onChange(
                                 value
