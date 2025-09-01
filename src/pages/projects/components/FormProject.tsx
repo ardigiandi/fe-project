@@ -34,6 +34,7 @@ import z from "zod";
 import ReactSelect from "react-select";
 import { Textarea } from "@/components/ui/textarea";
 import Loading from "@/components/Loading";
+import { Project } from "@/types/type";
 
 // ini untuk react select
 interface TagsOption {
@@ -41,8 +42,9 @@ interface TagsOption {
   value: string;
 }
 
-const formSchema = z.object({
-    projectId: z.object().optional().nullable(),
+const formSchema = z
+  .object({
+    projectId: z.string().optional().nullable(),
     title: z.string().min(1, { message: "Title is required" }),
     description: z.string().min(1, { message: "Description is required" }),
     priority: z.string().min(1, { message: "Priority is required" }),
@@ -60,11 +62,16 @@ const formSchema = z.object({
     }
   });
 
-const FormProject = () => {
+interface FormProjectProps {
+  project?: Project;
+  getProject: () => void;
+}
+
+const FormProject = ({ getProject, project }: FormProjectProps) => {
   const [open, setOpen] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [tags, setTags] = useState<TagsOption[]>([]);
-//   const navigate = useNavigate();
+  //   const navigate = useNavigate();
 
   //   ini untuk menu select
   const priorityOptions = [
@@ -101,24 +108,28 @@ const FormProject = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      projectId: null,
-      title: "",
-      description: "",
-      priority: "",
-      tags: [],
-      dueDate: "",
+      projectId: project?._id || null,
+      title: project?.title || "",
+      description: project?.description || "",
+      priority: project?.priority || "low",
+      tags: project?.tags || [],
+      dueDate: project?.dueDate.slice(0, 10) || "",
     },
   });
+
+  const url = project ? `/projects/${project._id}/update` : "/projects";
+  const method = project ? "put" : "post";
 
   const handleForm = async (values: z.infer<typeof formSchema>) => {
     console.log(values);
     setLoading(true);
     try {
       await delay(500);
-      const { data } = await apiClient.post("/projects", values);
+      const { data } = await apiClient[method](url, values);
       toast.success(data.message, {
         onAutoClose: () => {
           setOpen(false);
+          getProject()
         },
       });
       setLoading(false);
@@ -135,7 +146,12 @@ const FormProject = () => {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button>Create Project</Button>
+        <Button
+          variant={"ghost"}
+          className={project ? "text-blue-800 hover:bg-white" : ""}
+        >
+          {project ? 'Edit' : 'Create Project'}
+        </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
