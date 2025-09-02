@@ -1,7 +1,9 @@
 
 const DashboardPage = () => {
   return (
-    <div>DashboardPage</div>
+    <div>
+      Fitur canggih dan kerennya ada di menu project ya 
+    </div>
   )
 }
 
